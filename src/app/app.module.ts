@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { UsersService } from './users/users.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistrationConfirmComponent } from './registration/registration-confirm/registration-confirm.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { TermsComponent } from './footer/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    RegistrationConfirmComponent,
+    ForgotPasswordComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,

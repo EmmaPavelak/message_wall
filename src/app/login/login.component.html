@@ -1,1 +1,47 @@
-<p>login works!</p>
+<div class="nk-content ">
+
+
+
+    <div class="nk-block nk-block-middle nk-auth-body">
+      <div class="nk-block-head">
+        <div class="nk-block-head-content">
+          <h5 class="nk-block-title">Se connecter</h5>
+          <div class="nk-block-des">
+            <p>Participer à l'avenure grâce à votre nom d'utilisateur et votre mot de passe.</p>
+          </div>
+        </div>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    
+        <div class="form-group">
+          <div class="form-label-group">
+            <label class="form-label" for="default-01">Nom d'utilisateur</label>       
+          </div>
+          <input type="text" class="form-control form-control-lg" id="default-01"
+            placeholder="Entrer votre nom d'utilisateur" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required >
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Nom d'utilisateur invalide</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label-group">
+            <label class="form-label" for="password">Mot de passe</label>
+            <a class="link link-primary link-sm" tabindex="-1" routerLink="/forgot-password">Mot de passe
+              oublié</a>
+          </div>
+          <div class="form-control-wrap">
+            <input type="password" class="form-control form-control-lg" id="password" placeholder="Entrer votre mot de passe"
+              formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+              
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Mot de passe invalide</div>
+            </div>
+          </div>
+        </div>
+        <div [ngStyle]="{ display: connectOK ?'none' : 'block' }" class="alert alert-danger alert-icon"><em class="icon ni ni-cross-circle"></em> <strong>La connexion a échoué</strong> ! Nom ou mot de passe incorrect. </div>
+        <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Se connecter</button></div>    
+      </form>
+      <div class="form-note-s2 pt-4"> Nouveau sur la plateforme ? <a routerLink="/registration">Créer un compte</a></div>
+    </div>
+    
+    </div>
