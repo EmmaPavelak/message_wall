@@ -1,0 +1,39 @@
+<div class="nk-aside" data-content="sideNav" data-toggle-overlay="true" data-toggle-screen="lg" data-toggle-body="true">
+    <div class="nk-sidebar-menu" data-simplebar>
+        <ul class="nk-menu">
+            <li class="nk-menu-heading">
+                <h6 class="overline-title text-primary-alt">Utilisateur</h6>
+            </li><!-- .nk-menu-heading -->
+            <li class="nk-menu-item">
+                <a [routerLink]="['/my-account/']" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-user-alt"></em></span>
+                    <span class="nk-menu-text">Mes Information</span>
+                </a>
+            </li><!-- .nk-menu-item -->
+           <li class="nk-menu-item">
+                <a [routerLink]="['/my-messages/']" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
+                    <span class="nk-menu-text">Mes messages</span>
+                </a>
+            </li><!-- .nk-menu-item -->
+            <li class="nk-menu-heading"  [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }" >
+                <h6 class="overline-title text-danger">Administration</h6>
+            </li><!-- .nk-menu-heading -->
+            <li class="nk-menu-item"  [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }" >
+                <a [routerLink]="['/edit-user/']" class="nk-menu-link text-danger">
+                    <span class="nk-menu-icon"><em class="icon ni ni-users text-danger"></em></span>
+                    <span class="nk-menu-text">Gestion des utilisateurs</span>
+                </a>
+            </li>
+            <li class="nk-menu-item"  [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }" >
+                <a [routerLink]="['/edit-message/']" class="nk-menu-link text-danger">
+                    <span class="nk-menu-icon"><em class="icon ni ni-users text-danger"></em></span>
+                    <span class="nk-menu-text">Gestion des messages</span>
+                </a>
+            </li>
+        </ul><!-- .nk-menu -->
+    </div><!-- .nk-sidebar-menu -->
+    <div class="nk-aside-close">
+        <a href="#" class="toggle" data-target="sideNav"><em class="icon ni ni-cross"></em></a>
+    </div><!-- .nk-aside-close -->
+</div><!-- .nk-aside -->

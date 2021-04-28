@@ -1,0 +1,31 @@
+<button class="btn btn-secondary" [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }"
+    (click)="displayAdd()">Ecrire un nouveau message</button>
+
+<form id="addTreeForm" [formGroup]="addMessageForm" (ngSubmit)="onSubmit()"
+    [ngStyle]="{ display: seeAddForm ?'flex' : 'none' }">
+
+    <div class="form-group">
+        <div class="form-label-group">
+            <label class="form-label" for="message">Message</label>
+        </div>
+        <input type="text" class="form-control form-control-lg" id="message" placeholder="Entrer votre message"
+            formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required>
+        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+            <div *ngIf="f.message.errors.required">Message vide</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-label-group">
+            <label class="form-label" for="username">Pseudo</label>
+        </div>
+        <div class="form-control-wrap">
+            <input type="text" class="form-control form-control-lg" id="username" placeholder="Dites nous votre petit nom"
+                formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Pseudo vide</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Envoyer votre message</button></div>
+</form>

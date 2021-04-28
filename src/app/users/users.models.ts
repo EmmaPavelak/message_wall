@@ -8,4 +8,6 @@ export interface IUser {
     tel:number;
     address:string;
     birthDate:Date;
+    nbmess:number;
+    role:string;
 }

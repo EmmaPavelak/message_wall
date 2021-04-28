@@ -1,0 +1,223 @@
+<body class="nk-body bg-white npc-default has-aside ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            <app-aside-profil></app-aside-profil>
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">Gestion des utilisateurs</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <p>Vous pouvez editer ou supprimer un utilisateur.</p>
+                                                </div>
+                                            </div><!-- .nk-block-head-content -->
+                                        </div><!-- .nk-block-between -->
+                                    </div><!-- .nk-block-head -->
+                                    <div class="card card-bordered card-preview">
+                                        <table class="table table-tranx">
+                                            <thead>
+                                                <tr class="tb-tnx-head">
+                                                    <th class="tb-tnx-id"><span class="">#</span></th>
+                                                    <th class="tb-tnx-info">
+                                                        <span class="tb-tnx-desc d-none d-sm-inline-block">
+                                                            <span>Nom complet</span>
+                                                        </span>
+                                                        <span class="tb-tnx-date d-md-inline-block d-none">
+                                                            <span class="d-md-none">Date</span>
+                                                            <span class="d-none d-md-block">
+                                                                <span>Pseudo</span>
+                                                                <span>E-mail</span>
+                                                            </span>
+                                                        </span>
+                                                    </th>
+                                                    <th class="tb-tnx-amount is-alt">
+                                                        <span class="tb-tnx-total">Messages envoyés</span>
+                                                        <span class="tb-tnx-status d-none d-md-inline-block">Groupe</span>
+                                                    </th>
+                                                    <th class="tb-tnx-action">
+                                                        <span>&nbsp;</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="tb-tnx-item" *ngFor=" let user of users">
+                                                    <td class="tb-tnx-id">
+                                                        <a href="#"><span>{{user.id}}</span></a>
+                                                    </td>
+                                                    <td class="tb-tnx-info">
+                                                        <div class="tb-tnx-desc">
+                                                            <span class="title">{{user.firstname}} {{user.lastname}}</span>
+                                                        </div>
+                                                        <div class="tb-tnx-date">
+                                                            <span class="date">{{user.username}}</span>
+                                                            <span class="date">{{user.email}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="tb-tnx-amount is-alt">
+                                                        <div class="tb-tnx-total">
+                                                            <span class="amount">{{user.nbmess}}<em class="ml-1 icon ni ni-send"></em></span>
+                                                        </div>
+                                                        <div class="tb-tnx-status">
+                                                            <span class="badge badge-dot badge-body" [ngClass] = "{'badge-danger' : user.role=='Administrateur'}">{{user.role}}</span> 
+                                                        </div>
+                                                    </td>
+                                                    <td class="tb-tnx-action">
+                                                        <div class="dropdown">
+                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
+                                                                <ul class="link-list-plain">
+                                                                    <li><a href="" (click)="getUserById(user.id)" data-toggle="modal" data-target="#profile-edit">Editer</a></li>
+                                                                    <li><a (click)="deleteUser(user.id)" class="text-danger">Supprimer</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>                                                                                      
+                                            </tbody>
+                                        </table>
+                                    </div><!-- .card-preview -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+                <!-- @@ Profile Edit Modal @e -->
+                <div class="modal fade" tabindex="-1" role="dialog" id="profile-edit">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                            <div class="modal-body modal-body-lg">
+                                <h5 class="title">Mettre à jour le profil</h5>
+                                <ul class="nk-nav nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#personal">Information Personnel</a>
+                                    </li>                           
+                                </ul><!-- .nav-tabs -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="personal">
+                                        <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+                                           
+                                        <div class="row gy-4">
+                                        
+                                            <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="user.id" >
+                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="firstname">Prénom</label>
+                                                    <input type="text" class="form-control form-control-lg" formControlName="firstname" id="firstname" [(ngModel)]="user.firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="lastname">Nom</label>
+                                                    <input type="text" class="form-control form-control-lg" formControlName="lastname" id="lastname" [(ngModel)]="user.lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                                                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="username">Pseudo</label>
+                                                    <input type="text" class="form-control form-control-lg" id="username" formControlName="username" [(ngModel)]="user.username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.username.errors.required">Nom d'utilisateur non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="password">Mot de passe</label>
+                                                    <input type="password" class="form-control form-control-lg" id="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Entrez votre mot de passe">
+                                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.password.errors.required">Mot de passe non rempli</div>
+                                                        <div *ngIf="f.password.errors.minlenght" class="text-danger">Mot de passe invalide</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="email">E-mail</label>
+                                                    <input type="eamil" class="form-control form-control-lg" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" [(ngModel)]="user.email" placeholder="Entrez votre email">
+                                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.email.errors.required">Email non rempli</div>
+                                                        <div *ngIf="f.email.errors.email" class="text-danger">Email invalide</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="phone-no">Numéro de téléphone</label>
+                                                    <input type="text" class="form-control form-control-lg" id="phone-no" formControlName="tel" [(ngModel)]="user.tel"[ngClass]="{ 'is-invalid': submitted && f.tel.errors }">
+                                                    <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.tel.errors.required">Téléphone non rempli</div>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="birth-day">Date de Naissance</label>
+                                                    <input type="text" class="form-control form-control-lg date-picker" id="birth-day" formControlName="birthDate"  [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"[(ngModel)]="user.birthDate"> <!--.substr(0, 10)-->
+                                                    <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.birthDate.errors.required">Date de naissance non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="address-l1">Adresse</label>
+                                                    <input type="text" class="form-control form-control-lg" id="address-l1" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" [(ngModel)]="user.address">
+                                                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.address.errors.required">Adresse non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">                                           
+                                                <div class="form-group">
+                                                    <label class="form-label" for="role-l1">Role</label>
+                                                    <select class="form-control form-control-lg" id="role"  formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" [(ngModel)]="user.role">
+                                                        <option value="Utilisateur">Utilisateur</option>
+                                                        <option value="Administrateur">Administrateur</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.role.errors.required">Role non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                    <li>                                             
+                                                        <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Mettre à jour le profil</button></div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div><!-- .tab-pane -->
+                
+                                </div><!-- .tab-content -->
+                            </div><!-- .modal-body -->
+                        </div><!-- .modal-content -->
+                    </div><!-- .modal-dialog -->
+                </div><!-- .modal -->
+    </div>
+</body>

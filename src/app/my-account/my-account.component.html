@@ -1,0 +1,213 @@
+<body class="nk-body bg-white npc-default has-aside ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                           <app-aside-profil></app-aside-profil>
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Données personnelles</h3>
+                                            <div class="nk-block-des">
+                                                <p>Vous avez un contrôle total sur vos données personnelles.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <div class="card-inner card-inner-lg">
+                                                <div class="nk-block">
+                                                    <div class="nk-data data-list data-list-s2">
+                                                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Nom Complet</span>
+                                                                <span class="data-value">{{user.firstname}} {{user.lastname}}</span>
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Pseudo</span>
+                                                                <span class="data-value">{{user.username}}</span>
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Mail</span>
+                                                                <span class="data-value">{{user.email}}</span>
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Numéro de téléphone</span>
+                                                                <div *ngIf="user.tel;then ok else notok">Le contenu saisi ici sera ignoré.</div>
+                                                                <ng-template #ok>
+                                                                    <span class="data-value">0{{user.tel}}</span>
+                                                                </ng-template>
+                                                                <ng-template #notok>
+                                                                    <span class="data-value text-soft">Non renseigné</span>
+                                                                </ng-template>
+                                                                
+                                                                
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Date de Naissance</span>
+                                                                <span class="data-value">{{user.birthDate.substr(0, 10)}}</span>
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                        <div class="data-item" data-toggle="modal" data-target="#profile-edit" data-tab-target="#address">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Adresse</span>
+                                                                <span class="data-value">{{user.address}}</span>
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                        <div class="data-item" data-toggle="modal" data-target="#profile-edit" data-tab-target="#address">
+                                                            <div class="data-col">
+                                                                <span class="data-label">Nombre de messages envoyés</span>
+                                                                <span class="data-value">{{user.nbmess}}</span>
+                                                            </div>
+                                                            <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                                        </div><!-- data-item -->
+                                                    </div><!-- data-list -->
+                                                </div><!-- .nk-block -->
+                                            </div><!-- .card-inner -->
+                                        </div><!-- .card -->
+                                    </div><!-- .nk-block -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+        <!-- @@ Profile Edit Modal @e -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="profile-edit">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">Mettre à jour le profil</h5>
+                        <ul class="nk-nav nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#personal">Information Personnel</a>
+                            </li>                           
+                        </ul><!-- .nav-tabs -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="personal">
+                                <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+                                   
+                                <div class="row gy-4">
+                                
+                                    <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="id" >
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="full-name">Prénom</label>
+                                            <input type="text" class="form-control form-control-lg" formControlName="firstname" id="full-name" [(ngModel)]="user.firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                                            <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                                <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="full-name">Nom</label>
+                                            <input type="text" class="form-control form-control-lg" formControlName="lastname" id="full-name" [(ngModel)]="user.lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                                            <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                                <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="display-name">Pseudo</label>
+                                            <input type="text" class="form-control form-control-lg" id="display-name" formControlName="username" [(ngModel)]="user.username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                                            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                                <div *ngIf="f.username.errors.required">Nom d'utilisateur non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="display-name">Mot de passe</label>
+                                            <input type="password" class="form-control form-control-lg" id="display-name" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Entrez votre mot de passe">
+                                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                <div *ngIf="f.password.errors.required">Mot de passe non rempli</div>
+                                                <div *ngIf="f.password.errors.minlenght" class="text-danger">Mot de passe invalide</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="email">E-mail</label>
+                                            <input type="eamil" class="form-control form-control-lg" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" [(ngModel)]="user.email" placeholder="Entrez votre email">
+                                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                <div *ngIf="f.email.errors.required">Email non rempli</div>
+                                                <div *ngIf="f.email.errors.email" class="text-danger">Email invalide</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone-no">Numéro de téléphone</label>
+                                            <input type="text" class="form-control form-control-lg" id="phone-no" formControlName="tel" [(ngModel)]="user.tel"[ngClass]="{ 'is-invalid': submitted && f.tel.errors }">
+                                            <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                                                <div *ngIf="f.tel.errors.required">Téléphone non rempli</div>
+                                            </div>
+                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="birth-day">Date de Naissance</label>
+                                            <input type="text" class="form-control form-control-lg date-picker" id="birth-day" formControlName="birthDate"  [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"[(ngModel)]="user.birthDate"> <!--.substr(0, 10)-->
+                                            <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                                                <div *ngIf="f.birthDate.errors.required">Date de naissance non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="address-l1">Adresse</label>
+                                            <input type="text" class="form-control form-control-lg" id="address-l1" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" [(ngModel)]="user.address">
+                                            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                                <div *ngIf="f.address.errors.required">Adresse non rempli</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>                                             
+                                                <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Mettre à jour le profil</button></div>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                </form>
+                            </div><!-- .tab-pane -->
+        
+                        </div><!-- .tab-content -->
+                    </div><!-- .modal-body -->
+                </div><!-- .modal-content -->
+            </div><!-- .modal-dialog -->
+        </div><!-- .modal -->
+    </div>
+</body>
