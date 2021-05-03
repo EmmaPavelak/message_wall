@@ -55,8 +55,17 @@ export class UsersService {
   createUser(data: IUser[]): Observable<Object> {
     return this.http.post(`${this.url}/api/auth/registration`, data)  
   }
-  updateUser(id: number,data: IUser[]): Observable<Object> {
-    return this.http.put(`${this.url}/api/auth/${id}`, data)  
+  updateUser(id: number,data: IUser[]) {
+    //return this.http.put(`${this.url}/api/auth/${id}`, data)  
+    return new Promise((resolve, reject) => { this.http.put(`${this.url}/api/auth/${id}`, data) .subscribe(
+      res => {
+        resolve(res);
+      },
+      (error) => {
+        reject(error);
+      }
+      );
+    });  
   }
   deleteUser(id: number){
     return this.http.delete(`${this.url}/api/auth/${id}`)  

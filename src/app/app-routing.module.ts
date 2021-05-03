@@ -17,18 +17,23 @@ import { RegistrationComponent } from './registration/registration.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'concept', component: ConceptComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'registration', component: RegistrationComponent },
  { path: 'registration-confirm', component: RegistrationConfirmComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'terms', component: TermsComponent },
-  { path: 'edit-user',  canActivate: ['AdminGuard'], component: EditUserComponent },
   { path: 'contact', component: ContactComponent }, 
-  { path: 'contact-confirm', component: ContactConfirmComponent }, 
-  { path: 'my-account', component: MyAccountComponent },
-  { path: 'concept', component: ConceptComponent },
+  { path: 'contact-confirm', component: ContactConfirmComponent },  
+
+  //ESPACE USER
+  { path: 'my-account', component: MyAccountComponent }, 
   { path: 'my-messages', component: MyMessagesComponent },
-  { path: 'edit-message', component: EditMessageComponent },
+  //ESPACE ADMIN - lazyloading
+  //{ path: 'admin',  canActivate: ['AdminGuard'], loadChildren: () =>import('./admin.module').then(module => module.AdminModule) },
+  { path: 'edit-user',  canActivate: ['AdminGuard'], component: EditUserComponent },
+  { path: 'edit-message', canActivate: ['AdminGuard'], component: EditMessageComponent },
+
    /*{ path: 'not-found', component: FourOhFourComponent },*/
   { path: '**', redirectTo: '' }
 ];

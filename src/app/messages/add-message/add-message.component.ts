@@ -18,24 +18,30 @@ export class AddMessageComponent implements OnInit {
     token=localStorage.getItem('token');
     tokenDecode:any; 
     user:any;
+    idUser=0;
 
  
     ngOnInit(): void {   
   
-      if(this.token != null){
-        this.tokenDecode = jwt_decode(this.token);
-      } 
-      
-      this.userService.getUserByID(this.tokenDecode.id).then((value) => {
-        this.user = value; 
-        });
     }
   
     constructor(private messageService: MessageService, private formBuilder: FormBuilder, private userService: UsersService) { 
+      
+      if(this.token != null){
+        this.tokenDecode = jwt_decode(this.token);
+        this.idUser = this.tokenDecode.id;
+
+        this.userService.getUserByID(this.tokenDecode.id).then((value) => {
+          this.user = value; 
+          });
+      }     
 
       this.addMessageForm = this.formBuilder.group({
         message: ['', Validators.required],
-        username: ['', Validators.required]
+        username: ['', Validators.required],
+        
+        idUser:this.idUser,
+        sendDate: new Date()
       });
       
     }
@@ -58,8 +64,11 @@ export class AddMessageComponent implements OnInit {
       }
       this.messageService.addMessage(this.addMessageForm.value).then((value) => {
         console.warn('Your order has been submitted', this.addMessageForm.value);
-       // location.reload();
+        location.reload();
       });
+
+      this.user.nbmess++;
+      this.userService.updateUser(this.tokenDecode.id,this.user);
     }
    
 }

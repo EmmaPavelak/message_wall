@@ -36,14 +36,14 @@ import { EditMessageComponent } from './edit-message/edit-message.component';
     RegistrationConfirmComponent,
     ForgotPasswordComponent,
     TermsComponent,
-    MyAccountComponent,
-    EditUserComponent,
+    MyAccountComponent,  
     ContactComponent,
     MessagewallComponent,
     AddMessageComponent,
     ConceptComponent,
     MyMessagesComponent,
     AsideProfilComponent,
+    EditUserComponent,
     EditMessageComponent
   ],
   imports: [

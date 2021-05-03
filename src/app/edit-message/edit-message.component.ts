@@ -17,13 +17,11 @@ export class EditMessageComponent implements OnInit {
   ngOnInit(): void {
     this.messageService.getAllMessages().then((value) => {
       this.messages=value;
-      console.log(value);
     });
   }
   getMessageById(id: number){
     this.messageService.getMessageById(id).then((value) => {
       this.onemessage=value;
-      console.log(value);
     });
   }  
   deleteMessage(id: number){

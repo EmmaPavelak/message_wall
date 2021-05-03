@@ -30,19 +30,18 @@
                                                         <span class="tb-tnx-desc d-none d-sm-inline-block">
                                                             <span>Message</span>
                                                         </span>
-                                                        <span class="tb-tnx-date d-md-inline-block d-none">
-                                                          
+                                                        <span class="tb-tnx-date d-md-inline-block d-none">                                                       
                                                             <span class="d-none d-md-block">
                                                                 <span>Pseudo utilisé</span>
-                                                                <span>Date d'envoie</span>
+                                                                <span>Date d'envoi</span>
                                                             </span>
                                                         </span>
-                                                    </th>
-                                                    
+                                                    </th>                                                  
                                                     <th class="tb-tnx-action">
                                                         <span>&nbsp;</span>
                                                     </th>
                                                 </tr>
+
                                             </thead>
                                             <tbody>
                                                 <tr class="tb-tnx-item" *ngFor=" let message of messages">
@@ -54,10 +53,12 @@
                                                             <span class="title">{{message.message}}</span>
                                                         </div>
                                                         <div class="tb-tnx-date">
-                                                            <span class="username">{{message.username}}</span>  
-                                                            <span class="date">{{message.date}}</span>                                                           
+                                                            <span class="date">{{message.username}}</span>  
+                                                            <span class="date">{{message.sendDate.substring(0,10)}}</span>                                                           
                                                         </div>
-                                                    </td>                                                  
+                                                    </td>   
+                                                    
+                                                    
                                                     <td class="tb-tnx-action">
                                                         <div class="dropdown">
                                                             <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>

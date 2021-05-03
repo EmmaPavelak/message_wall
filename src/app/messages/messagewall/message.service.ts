@@ -27,8 +27,8 @@ export class MessageService {
       );
     }); 
   }
-  getMessageByUser(user: string){
-    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/username/${user}`).subscribe( 
+  getMessageByUser(userId: number){
+    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/username/${userId}`).subscribe( 
       res => {
         resolve(res);
       },

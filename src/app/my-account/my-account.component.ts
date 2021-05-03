@@ -54,20 +54,13 @@ export class MyAccountComponent implements OnInit {
         this.user = value; 
         });
     }
-    console.log(this.id);
   }
 
 updateUser(){
-  this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).subscribe(
-    res => {
-      console.log(res);
-      location.reload();
-    },
-    err => {
-      this.registerOK = false;
-      console.log('Error occured:' , err);
-    }
-  );
+  this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).then((value) => {
+    console.log(value);
+    location.reload();
+  });
 }
 onSubmit(): void {
   this.submitted = true;

@@ -10,13 +10,11 @@ export class MessagewallComponent implements OnInit {
 
   constructor(private messageService: MessageService) { }
   messages:any;
+
   ngOnInit(): void {
     this.messageService.getAllMessages().then((value) => {
       this.messages=value;
-      console.log(value);
-    });
-    
+    });    
   }
-
 
 }
