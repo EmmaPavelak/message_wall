@@ -1,4 +1,4 @@
-<button class="btn btn-secondary" [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }"
+<button class="btn btn-secondary"
     (click)="displayAdd()">Ecrire un nouveau message</button>
 
 <form id="addTreeForm" [formGroup]="addMessageForm" (ngSubmit)="onSubmit()"
