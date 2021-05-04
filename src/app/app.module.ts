@@ -24,6 +24,9 @@ import { ConceptComponent } from './concept/concept.component';
 import { MyMessagesComponent } from './my-messages/my-messages.component';
 import { AsideProfilComponent } from './aside-profil/aside-profil.component';
 import { EditMessageComponent } from './edit-message/edit-message.component';
+import { MyChannelsComponent } from './my-channels/my-channels.component';
+import { OneChannelComponent } from './one-channel/one-channel.component';
+import { EditChannelComponent } from './edit-channel/edit-channel.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { EditMessageComponent } from './edit-message/edit-message.component';
     MyMessagesComponent,
     AsideProfilComponent,
     EditUserComponent,
-    EditMessageComponent
+    EditMessageComponent,
+    MyChannelsComponent,
+    OneChannelComponent,
+    EditChannelComponent
   ],
   imports: [
     BrowserModule,

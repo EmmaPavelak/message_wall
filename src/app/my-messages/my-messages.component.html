@@ -35,8 +35,11 @@
                                                                 <span>Pseudo utilisé</span>
                                                                 <span>Date d'envoi</span>
                                                             </span>
-                                                        </span>
-                                                    </th>                                                  
+                                                        </span>                                                  
+                                                    </th>  
+                                                    <th class="tb-tnx-amount is-alt">
+                                                        <span class="tb-tnx-total">Channel</span>
+                                                    </th>                                                
                                                     <th class="tb-tnx-action">
                                                         <span>&nbsp;</span>
                                                     </th>
@@ -57,7 +60,11 @@
                                                             <span class="date">{{message.sendDate.substring(0,10)}}</span>                                                           
                                                         </div>
                                                     </td>   
-                                                    
+                                                    <td class="tb-tnx-amount is-alt">
+                                                        <div class="tb-tnx-total">
+                                                            <span class="amount">{{message.idChannel}}</span>
+                                                        </div>                                                      
+                                                    </td>
                                                     
                                                     <td class="tb-tnx-action">
                                                         <div class="dropdown">

@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/users/users.service';
 import { MessageService } from '../messagewall/message.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-add-message',
   templateUrl: './add-message.component.html',
@@ -19,13 +20,14 @@ export class AddMessageComponent implements OnInit {
     tokenDecode:any; 
     user:any;
     idUser=0;
-
+    idChannel= this.route.snapshot.params['id'];
  
-    ngOnInit(): void {   
+    ngOnInit(): void {  
+     
   
     }
   
-    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private userService: UsersService) { 
+    constructor(private messageService: MessageService, private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UsersService) { 
       
       if(this.token != null){
         this.tokenDecode = jwt_decode(this.token);
@@ -34,13 +36,17 @@ export class AddMessageComponent implements OnInit {
         this.userService.getUserByID(this.tokenDecode.id).then((value) => {
           this.user = value; 
           });
-      }     
+      }  
+      
+      if(this.route.snapshot.params['id'] == null){
+        this.idChannel = 0;
+      } 
 
       this.addMessageForm = this.formBuilder.group({
         message: ['', Validators.required],
-        username: ['', Validators.required],
-        
+        username: ['', Validators.required],        
         idUser:this.idUser,
+        idChannel:this.idChannel,
         sendDate: new Date()
       });
       

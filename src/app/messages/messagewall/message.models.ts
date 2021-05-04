@@ -4,4 +4,5 @@ export interface IMessage {
     message:string;
     idUser:number;
     sendDate:Date;
+    idChannel:number;
 }

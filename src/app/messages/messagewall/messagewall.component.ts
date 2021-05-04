@@ -12,7 +12,7 @@ export class MessagewallComponent implements OnInit {
   messages:any;
 
   ngOnInit(): void {
-    this.messageService.getAllMessages().then((value) => {
+    this.messageService.getMessageByChannel(0).then((value) => {
       this.messages=value;
     });    
   }
