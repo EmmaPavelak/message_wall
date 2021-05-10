@@ -1,7 +1,7 @@
 <button class="btn btn-secondary"
     (click)="displayAdd()">Ecrire un nouveau message</button>
 
-<form id="addTreeForm" [formGroup]="addMessageForm" (ngSubmit)="onSubmit()"
+<form [formGroup]="addMessageForm" (ngSubmit)="onSubmit()"
     [ngStyle]="{ display: seeAddForm ?'flex' : 'none' }">
 
     <div class="form-group">
