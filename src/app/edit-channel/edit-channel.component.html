@@ -137,8 +137,14 @@
                                                         <div *ngIf="f.statut.errors.required">Role non rempli</div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div>Ajouter un membre</div>
+                                            </div>         <div class="col-md-6">                                           
+                                                <div class="form-group">
+                                                    <label class="form-label" for="user">Ajouter un membre</label>
+                                                    <select class="form-control form-control-lg" id="user" formControlName="usersId" >
+                                                        <option value="{{user.id}}" *ngFor=" let user of users" >{{user.username}}</option>                                                      
+                                                    </select>                                                   
+                                                </div>
+                                            </div>                                         
                                             <div class="col-12">
                                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                                     <li>                                             

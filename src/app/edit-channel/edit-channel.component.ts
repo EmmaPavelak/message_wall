@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import jwt_decode from "jwt-decode";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChannelsService } from '../channels/channels.service';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-edit-channel',
@@ -10,6 +11,7 @@ import { ChannelsService } from '../channels/channels.service';
 })
 export class EditChannelComponent implements OnInit { 
 
+    users: any;
     channels: any;
     channel:any;
     tokenDecode:any;
@@ -19,8 +21,9 @@ export class EditChannelComponent implements OnInit {
     submitted = false;
     registerOK = true;
     id:number=0;
+    newUsersId:any;
 
-    constructor(private channelService: ChannelsService, private formBuilder: FormBuilder) { 
+    constructor(private channelService: ChannelsService, private userService: UsersService, private formBuilder: FormBuilder) { 
       this.channel={
         id: 0,
         channelName: "",
@@ -49,6 +52,11 @@ export class EditChannelComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+      this.userService.getAllUser().then((value) => {
+        this.users=value;
+      });
+
       this.channelService.getAllChannels().then((value) => {
         this.channels=value;
       });
@@ -73,9 +81,16 @@ export class EditChannelComponent implements OnInit {
         });
     }
     updateChannel(){
-      this.channelService.updateChannel(this.tokenDecode.id,this.updateForm.value).then((value) => {
-        console.log(value);
-        location.reload();
+      if(this.channel.usersId!=null && this.channel.usersId!=""){
+        this.newUsersId= this.channel.usersId+","+this.updateForm.value.usersId;
+      }else{
+        this.newUsersId=this.updateForm.value.usersId;
+      }
+      this.channelService.updateChannel(this.tokenDecode.id, {id: this.updateForm.value.id,
+      channelName:  this.updateForm.value.channelName,nbMessages:this.channel.nbMessage,creationDate:this.channel.creationDate,
+      statut:  this.updateForm.value.statut,
+      usersId: this.newUsersId}).then((value) => {
+        console.log(value);      
       });
     }
   onSubmit(): void {

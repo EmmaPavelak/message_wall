@@ -166,7 +166,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="phone-no">Numéro de téléphone</label>
-                                            <input type="text" class="form-control form-control-lg" id="phone-no" formControlName="tel" [(ngModel)]="user.tel"[ngClass]="{ 'is-invalid': submitted && f.tel.errors }">
+                                            <input type="text" class="form-control form-control-lg" id="phone-no" formControlName="tel" [(ngModel)]="user.tel" [ngClass]="{ 'is-invalid': submitted && f.tel.errors }">
                                             <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
                                                 <div *ngIf="f.tel.errors.required">Téléphone non rempli</div>
                                             </div>

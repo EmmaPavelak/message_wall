@@ -4,4 +4,5 @@ export interface IChannel {
     nbMessages:string;
     creationDate:string;
     statut:string;
+    usersId:string;
 }

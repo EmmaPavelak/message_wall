@@ -59,7 +59,7 @@ export class ChannelsService {
       );
     }); 
   }
-  updateChannel(id: number,data: IChannel[]){
+  updateChannel(id: number,data: IChannel){
     return new Promise((resolve, reject) => {this.http.put(`${this.url}/${id}`,data).subscribe( 
       (res: any)=> {
         location.reload();
