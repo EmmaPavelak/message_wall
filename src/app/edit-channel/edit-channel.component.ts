@@ -64,7 +64,6 @@ export class EditChannelComponent implements OnInit {
       if(this.token != null){
         this.tokenDecode = jwt_decode(this.token); 
         this.id=this.tokenDecode.id;
-        this.getChannelById(this.id);
       }
     }
 
