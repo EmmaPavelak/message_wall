@@ -9,46 +9,46 @@ import { MessageService } from '../messagewall/message.service';
   styleUrls: ['./add-message.component.scss']
 })
 export class AddMessageComponent implements OnInit {
-  
- 
-    addMessageForm: FormGroup;  
-    submitted = false;  
+
+
+    addMessageForm: FormGroup;
+    submitted = false;
     seeAddForm= false;
-  
+
     token=localStorage.getItem('token');
-    tokenDecode:any; 
+    tokenDecode:any;
     user:any;
 
- 
-    ngOnInit(): void {   
-  
+
+    ngOnInit(): void {
+
       if(this.token != null){
         this.tokenDecode = jwt_decode(this.token);
-      } 
-      
+      }
+
       this.userService.getUserByID(this.tokenDecode.id).then((value) => {
-        this.user = value; 
+        this.user = value;
         });
     }
-  
-    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private userService: UsersService) { 
+
+    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private userService: UsersService) {
 
       this.addMessageForm = this.formBuilder.group({
         message: ['', Validators.required],
-        username: ['', Validators.required]
+        username: ['Anonyme', Validators.required]
       });
-      
+
     }
-  
+
     get f() { return this.addMessageForm.controls; }
- 
+
     displayAdd(){
       if (this.seeAddForm == true){
         this.seeAddForm = false;
       }else{
         this.seeAddForm = true;
-      }      
-    }  
+      }
+    }
 
     onSubmit(): void {
       this.submitted = true;
@@ -61,7 +61,5 @@ export class AddMessageComponent implements OnInit {
        // location.reload();
       });
     }
-   
-}
-  
 
+}

@@ -1,82 +1,80 @@
-<div class="nk-content-body m-5">
-    <div class="nk-content-wrap">
-        <div class="nk-block-head nk-block-head-lg">
-            <div class="nk-block-head-sub"><a href="support.html" class="text-soft"><span>Contact</span></a></div>
-            <div class="nk-block-head-content">
-                <h2 class="nk-block-title fw-normal">Comment pouvons-nous vous aider ?</h2>
-                <div class="nk-block-des">
-                    <p>Une question, une suggestion, un problème ? Dites nous tout.</p>
-                </div>
-            </div>
+
+<div class="nk-block-head nk-block-head-lg">
+    <div class="nk-block-head-content">
+        <h2 class="nk-block-title fw-normal">Comment pouvons-nous vous aider ?</h2>
+        <div class="nk-block-des">
+            <p>Une question, une suggestion, un problème ? Dites nous tout.</p>
         </div>
-        <div class="nk-block mb-3">
-            <div class="card card-bordered">
-                <div class="card-inner">
-                    <form  [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-                        <div class="row g-4">                           
-                            <div class="col-md-6">
-                                <div class="form-group"><label class="form-label"><span>Prénom</span></label>
-                                    <input type="text"
-                                    class="form-control form-control-lg" formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required placeholder="Entre votre prénom ">
-                                </div>
-                                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-                                    <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group"><label class="form-label"><span>Nom</span></label>
-                                    <input type="text"
-                                    class="form-control form-control-lg" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" required placeholder="Entre votre nom ">                                   
-                                </div>
-                                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                                    <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group"><label class="form-label">Email</label>
-                                    <div class="form-control-wrap"><input type="email"
-                                            class="form-control form-control-lg" formControlName="email"[ngClass]="{ 'is-invalid': submitted && f.email.errors }" required placeholder="Entrer votre adresse">
-                                    </div>
-                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                        <div *ngIf="f.email.errors.required">Email non rempli</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group"><label class="form-label"><span>Exprimez-vous</span></label>
-                                    <p class="text-soft">Nous sommes là pour vous répondre dans les plus brefs délais.</p>
-                                    <div class="form-control-wrap">
-                                        <div class="form-editor-custom"><textarea class="form-control form-control-lg no-resize" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" 
-                                                placeholder="Ecrivez votre message" required></textarea>
-                                            <div class="form-editor-action"><a class="link collapsed"
-                                                    data-toggle="collapse" href="#filedown"><em
-                                                        class="icon ni ni-clip"></em>Joindre un fichier</a></div>
-                                        </div>
-                                        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
-                                            <div *ngIf="f.message.errors.required">Message non rempli</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="choose-file">
-                                    <div class="form-group collapse" id="filedown">
-                                        <div class="support-upload-box">
-                                            <div class="upload-zone dropzone dz-clickable">
-                                                <div class="dz-message" data-dz-message=""><em
-                                                        class="icon ni ni-clip"></em><span class="dz-message-text">Drag
-                                                        your file</span><span class="dz-message-or"> or</span><button
-                                                        class="btn btn-primary">Select</button></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group"><button type="submit" class="btn btn-lg btn-primary btn-block">Nous contactez</button></div>                           
+    </div>
+</div>
+<div class="nk-block mb-3">
+    <div class="card card-bordered">
+        <div class="card-inner">
+            <form  [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="form-group"><label class="form-label"><span>Prénom</span></label>
+                            <input type="text"
+                            class="form-control form-control-lg" formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required placeholder="Entre votre prénom ">
                         </div>
-                    </form>
+                        <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"><label class="form-label"><span>Nom</span></label>
+                            <input type="text"
+                            class="form-control form-control-lg" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" required placeholder="Entre votre nom ">
+                        </div>
+                        <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group"><label class="form-label">Email</label>
+                            <div class="form-control-wrap"><input type="email"
+                                class="form-control form-control-lg" formControlName="email"[ngClass]="{ 'is-invalid': submitted && f.email.errors }" required placeholder="Entrer votre adresse">
+                            </div>
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email non rempli</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group"><label class="form-label"><span>Exprimez-vous</span></label>
+                            <p class="text-soft">Nous sommes là pour vous répondre dans les plus brefs délais.</p>
+                            <div class="form-control-wrap">
+                                <div class="form-editor-custom"><textarea class="form-control form-control-lg no-resize" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"
+                                    placeholder="Ecrivez votre message" required></textarea>
+                                    <div class="form-editor-action"><a class="link collapsed"
+                                        data-toggle="collapse" href="#filedown"><em
+                                        class="icon ni ni-clip"></em>Joindre un fichier</a>
+                                    </div>
+                                </div>
+                                <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                                    <div *ngIf="f.message.errors.required">Message non rempli</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="choose-file">
+                            <div class="form-group collapse" id="filedown">
+                                <div class="support-upload-box">
+                                    <div class="upload-zone dropzone dz-clickable">
+                                        <div class="dz-message" data-dz-message=""><em class="icon ni ni-clip"></em><span class="dz-message-text">Drag your file</span><span class="dz-message-or"> or</span>
+                                            <button class="btn btn-primary">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Nous contactez</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

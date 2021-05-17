@@ -3,7 +3,7 @@
         <!-- main @s -->
         <div class="nk-main ">
             <!-- wrap @s -->
-            <div class="nk-wrap ">
+            <div class="nk-wrap card card-bordered text-soft">
                 <!-- content @s -->
                 <div class="nk-content ">
                     <div class="container wide-xl">
@@ -31,14 +31,14 @@
                                                             <span>Message</span>
                                                         </span>
                                                         <span class="tb-tnx-date d-md-inline-block d-none">
-                                                          
+
                                                             <span class="d-none d-md-block">
                                                                 <span>Pseudo utilisé</span>
                                                                 <span>Date d'envoie</span>
                                                             </span>
                                                         </span>
                                                     </th>
-                                                    
+
                                                     <th class="tb-tnx-action">
                                                         <span>&nbsp;</span>
                                                     </th>
@@ -54,10 +54,10 @@
                                                             <span class="title">{{message.message}}</span>
                                                         </div>
                                                         <div class="tb-tnx-date">
-                                                            <span class="username">{{message.username}}</span>  
-                                                            <span class="date">{{message.date}}</span>                                                           
+                                                            <span class="username">{{message.username}}</span>
+                                                            <span class="date">{{message.date}}</span>
                                                         </div>
-                                                    </td>                                                  
+                                                    </td>
                                                     <td class="tb-tnx-action">
                                                         <div class="dropdown">
                                                             <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
@@ -69,7 +69,7 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                </tr>                                                                                     
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div><!-- .card-preview -->
@@ -93,16 +93,16 @@
                                 <ul class="nk-nav nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#personal">Information Personnel</a>
-                                    </li>                           
+                                    </li>
                                 </ul><!-- .nav-tabs -->
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="personal">
                                        <form [formGroup]="editMessageForm" (ngSubmit)="onSubmit()">
-                                           
+
                                         <div class="row gy-4">
-                                        
+
                                             <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="onemessage.id" >
-                                            
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="message">Message</label>
@@ -111,7 +111,7 @@
                                                         <div *ngIf="f.message.errors.required">Message non rempli</div>
                                                     </div>
                                                 </div>
-                                            </div>                                         
+                                            </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="username">Pseudo</label>
@@ -120,11 +120,11 @@
                                                         <div *ngIf="f.username.errors.required">Nom d'utilisateur non rempli</div>
                                                     </div>
                                                 </div>
-                                            </div>                                       
-                                    
+                                            </div>
+
                                             <div class="col-12">
                                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                                    <li>                                             
+                                                    <li>
                                                         <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Mettre à jour le message</button></div>
                                                     </li>
                                                     <li>
@@ -135,7 +135,7 @@
                                         </div>
                                         </form>
                                     </div><!-- .tab-pane -->
-                
+
                                 </div><!-- .tab-content -->
                             </div><!-- .modal-body -->
                         </div><!-- .modal-content -->
@@ -143,4 +143,3 @@
                 </div><!-- .modal -->
     </div>
 </body>
-

@@ -3,7 +3,7 @@
         <!-- main @s -->
         <div class="nk-main ">
             <!-- wrap @s -->
-            <div class="nk-wrap ">
+            <div class="nk-wrap card card-bordered text-soft">
                 <!-- content @s -->
                 <div class="nk-content ">
                     <div class="container wide-xl">
@@ -66,7 +66,7 @@
                                                             <span class="amount">{{user.nbmess}}<em class="ml-1 icon ni ni-send"></em></span>
                                                         </div>
                                                         <div class="tb-tnx-status">
-                                                            <span class="badge badge-dot badge-body" [ngClass] = "{'badge-danger' : user.role=='Administrateur'}">{{user.role}}</span> 
+                                                            <span class="badge badge-dot badge-body" [ngClass] = "{'badge-danger' : user.role=='Administrateur'}">{{user.role}}</span>
                                                         </div>
                                                     </td>
                                                     <td class="tb-tnx-action">
@@ -80,7 +80,7 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                </tr>                                                                                      
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div><!-- .card-preview -->
@@ -104,16 +104,16 @@
                                 <ul class="nk-nav nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#personal">Information Personnel</a>
-                                    </li>                           
+                                    </li>
                                 </ul><!-- .nav-tabs -->
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="personal">
                                         <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
-                                           
+
                                         <div class="row gy-4">
-                                        
+
                                             <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="user.id" >
-                                            
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="firstname">Prénom</label>
@@ -188,7 +188,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">                                           
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="role-l1">Role</label>
                                                     <select class="form-control form-control-lg" id="role"  formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" [(ngModel)]="user.role">
@@ -202,7 +202,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                                    <li>                                             
+                                                    <li>
                                                         <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Mettre à jour le profil</button></div>
                                                     </li>
                                                     <li>
@@ -213,7 +213,7 @@
                                         </div>
                                         </form>
                                     </div><!-- .tab-pane -->
-                
+
                                 </div><!-- .tab-content -->
                             </div><!-- .modal-body -->
                         </div><!-- .modal-content -->
