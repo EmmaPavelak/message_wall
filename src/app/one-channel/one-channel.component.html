@@ -1,0 +1,12 @@
+<h1>Nom du salon : {{channel.channelName}}</h1>
+<p>Nombre de message : {{channel.nbMessages}} </p>
+<p>Nombre de participants : {{channel.usersId.split(',').length}}</p>
+<app-add-message></app-add-message>
+
+<div class="card card-bordered" *ngFor=" let message of messages">
+    <div class="card-inner">
+        <h5 class="card-title">{{message.message}}</h5>
+    </div>
+</div>
+
+<a [routerLink]="['/my-channels/']" class="nk-menu-link text-danger">Voir les autres salons</a>

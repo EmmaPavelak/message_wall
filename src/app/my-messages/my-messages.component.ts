@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from '../messages/messagewall/message.service';
+import jwt_decode from "jwt-decode";
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-my-messages',
@@ -13,8 +15,11 @@ export class MyMessagesComponent implements OnInit {
   onemessage:any;
   editMessageForm: FormGroup;  
   submitted = false;  
+  tokenDecode:any;
+  token= localStorage.getItem('token');
+  user:any;
 
-  constructor(private messageService: MessageService, private formBuilder: FormBuilder) { 
+  constructor(private messageService: MessageService, private userService: UsersService, private formBuilder: FormBuilder) { 
     this.onemessage={id:0, message:'', username:''}
   this.editMessageForm = this.formBuilder.group({
       id: ['', Validators.required],
@@ -35,10 +40,15 @@ export class MyMessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.getMessageByUser("user").then((value) => {
-      this.messages=value;
-      console.log(value);
-    });
+    if(this.token != null){
+      this.tokenDecode = jwt_decode(this.token); 
+        this.messageService.getMessageByUser(this.tokenDecode.id).then((value) => {
+          this.messages=value;
+          console.log(value);
+        });
+      }
+
+ 
   }
   getMessageById(id: number){
     this.messageService.getMessageById(id).then((value) => {

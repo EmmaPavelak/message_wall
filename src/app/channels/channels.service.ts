@@ -1,25 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IMessage } from './message.models';
+import { IChannel } from './channels.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MessageService {
-
+export class ChannelsService {
+ 
   
-  url = 'http://localhost:3000/api/users-message';
-  messages:any;
+  url = 'http://localhost:3000/api/channels';
+  channels:any;
 
   constructor(private http: HttpClient) { }
   
-  getAllMessages(){
+  getAllChannels(){
     return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}`).subscribe( 
       res => {
-        this.messages=res;   
+        this.channels=res;   
         console.log(res);
-        resolve(this.messages);
+        resolve(this.channels);
       },
       (error) => {
         reject(error);
@@ -27,7 +26,7 @@ export class MessageService {
       );
     }); 
   }
-  getMessageByUser(userId: number){
+  getChannelByUser(userId: number){
     return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/username/${userId}`).subscribe( 
       res => {
         resolve(res);
@@ -38,18 +37,7 @@ export class MessageService {
       );
     }); 
   }
-  getMessageByChannel(channelId: number){
-    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/channel/${channelId}`).subscribe( 
-      res => {
-        resolve(res);
-      },
-      (error) => {
-        reject(error);
-      }
-      );
-    }); 
-  }
-  getMessageById(id: number){
+  getChannelById(id: number){
     return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/${id}`).subscribe( 
       res => {
         resolve(res);
@@ -60,7 +48,7 @@ export class MessageService {
       );
     }); 
   }
-  addMessage(data: IMessage[]){
+  addChannel(data: IChannel[]){
     return new Promise((resolve, reject) => {this.http.post(`${this.url}`,data).subscribe( 
       (res: any)=> {
         resolve(res);
@@ -71,7 +59,7 @@ export class MessageService {
       );
     }); 
   }
-  updateMessage(id: number,data: IMessage[]){
+  updateChannel(id: number,data: IChannel){
     return new Promise((resolve, reject) => {this.http.put(`${this.url}/${id}`,data).subscribe( 
       (res: any)=> {
         location.reload();
@@ -83,7 +71,7 @@ export class MessageService {
       );
     }); 
   }
-  deleteMessage(id: number){
+  deleteChannel(id: number){
     return new Promise((resolve, reject) => {this.http.delete(`${this.url}/${id}`).subscribe( 
       (res: any)=> {
         location.reload();

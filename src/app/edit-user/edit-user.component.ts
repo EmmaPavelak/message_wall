@@ -56,7 +56,6 @@ export class EditUserComponent implements OnInit {
       this.id=this.tokenDecode.id;
       this.getUserById(this.id);
     }
-    console.log(this.id);
   }
 
   deleteUser(id:number){
@@ -83,18 +82,12 @@ export class EditUserComponent implements OnInit {
       this.user = value; 
       });
   }
-updateUser(){
-  this.userService.updateUser(this.updateForm.value.id,this.updateForm.value).subscribe(
-    res => {
-      console.log(res);
+  updateUser(){
+    this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).then((value) => {
+      console.log(value);
       location.reload();
-    },
-    err => {
-      this.registerOK = false;
-      console.log('Error occured:' , err);
-    }
-  );
-}
+    });
+  }
 onSubmit(): void {
   this.submitted = true;
   console.log(this.updateForm.value);

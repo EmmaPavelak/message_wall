@@ -1,15 +1,17 @@
 <div class="nk-chat-editor">
     <form id="addTreeForm" [formGroup]="addMessageForm" (ngSubmit)="onSubmit()" style="width: 100%; display:flex;">
 
-    <div class="nk-chat-editor-upload  ml-n1">
-        <a href="#" class="btn btn-sm btn-icon btn-trigger text-primary toggle-opt" data-target="chat-upload"><em class="icon ni ni-plus-circle-fill"></em></a>
-        <div class="chat-upload-option" data-content="chat-upload">
-            <ul class="">
-                <li><a href="#"><em class="icon ni ni-img-fill"></em></a></li>
-                <li><a href="#"><em class="icon ni ni-camera-fill"></em></a></li>
-                <li><a href="#"><em class="icon ni ni-mic"></em></a></li>
-                <li><a href="#"><em class="icon ni ni-grid-sq"></em></a></li>
-            </ul>
+<form [formGroup]="addMessageForm" (ngSubmit)="onSubmit()"
+    [ngStyle]="{ display: seeAddForm ?'flex' : 'none' }">
+
+    <div class="form-group">
+        <div class="form-label-group">
+            <label class="form-label" for="message">Message</label>
+        </div>
+        <input type="text" class="form-control form-control-lg" id="message" placeholder="Entrer votre message"
+            formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required>
+        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+            <div *ngIf="f.message.errors.required">Message vide</div>
         </div>
     </div>
     <div class="nk-chat-editor-form">

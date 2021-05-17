@@ -1,0 +1,30 @@
+
+<div class="nk-block">
+    <h1>Mes salons</h1>
+    <div class="row g-gs">       
+        <div class="col-sm-6 col-lg-4 col-xxl-3"  *ngFor=" let channel of channels">
+            <div class="card card-bordered" >
+                <div class="card-inner">
+                    <div class="team">                 
+                        <div class="user-card user-card-s2 ">
+                            <div class="user-avatar xl">
+                                <em class="icon ni ni-user-alt"></em>
+                            </div>
+                            <div class="user-info">
+                                <h5>{{channel.channelName}}</h5>
+                            </div>
+                        </div>
+                        <ul class="team-statistics">
+                            <li><span>{{channel.usersId.split(',').length}}</span><span> Personnes</span></li>
+                            <li><span>{{channel.nbMessages}}</span><span> Messages</span></li>
+                        </ul>
+                        <div class="team-view">
+                            <a routerLink="/one-channel/{{channel.id}}" class="btn btn-round btn-dim btn-primary"><span>Rejoindre</span></a>
+                        </div>
+                    </div><!-- .team -->
+                </div><!-- .card-inner -->
+            </div><!-- .card -->
+        </div><!-- .col -->
+        
+    </div>
+</div><!-- .nk-block -->
