@@ -107,10 +107,10 @@ export class EditChannelComponent implements OnInit {
 
   onSubmitCrea(): void {
     this.submitted = true;
-    console.log(this.updateForm.value);
+    console.log(this.createForm.value);
     
     // stop here if form is invalid
-    if (this.updateForm.invalid) {
+    if (this.createForm.invalid) {
       return;
     }
     this.channelService.addChannel(this.createForm.value).then((value) => {
