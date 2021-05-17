@@ -1,48 +1,27 @@
-
-
-<div class="nk-block-head nk-block-head-sm">
-    <div class="nk-block-between">
-        <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Mes Salons</h3>
-        </div><!-- .nk-block-head-content -->
-        <div class="nk-block-head-content">
-        </div><!-- .nk-block-head-content -->
-    </div><!-- .nk-block-between -->
-</div><!-- .nk-block-head -->
-<div class="nk-block">
-    <div class="row g-gs">
-        <div class="col-sm-6 col-lg-4 col-xxl-3" *ngFor=" let channel of channels">
-            <div class="card card-bordered">
-                <div class="card-inner">
-                    <div class="team">
-                        <div class="user-card user-card-s2 ">
-                            <div class="user-avatar xl">
-                                <em class="icon ni ni-user-alt"></em>
-                            </div>
-                            <div class="user-info">
-                                <h5>{{channel.channelName}}</h5>
-                            </div>
+<div class="nk-chat">
+    <div class="nk-chat-body">
+        <div class="nk-chat-head">
+            <ul class="nk-chat-head-info">
+                <li class="nk-chat-body-close">
+                    <a href="#" class="btn btn-icon btn-trigger nk-chat-hide ml-n1"><em class="icon ni ni-arrow-left"></em></a>
+                </li>
+                <li class="nk-chat-head-user">
+                    <div class="user-card">
+                        <div class="user-avatar bg-purple">
+                            <span>G</span>
                         </div>
-                        <div class="row text-center my-3">
-                            <div class="col-6 title-stats">
-                                {{channel.usersId.split(',').length}}
-                            </div>
-                            <div class="col-6 title-stats">
-                                {{channel.nbMessages}}
-                            </div>
-                            <div class="col-6 name-stats">
-                                Personnes
-                            </div>
-                            <div class="col-6 name-stats">
-                                Messages
-                            </div>
+                        <div class="user-info">
+                            <div class="lead-text">Général</div>
                         </div>
-                        <div class="team-view text-center">
-                            <a routerLink="/one-channel/{{channel.id}}" class="btn btn-round btn-dim btn-primary"><span>Rejoindre</span></a>
-                        </div>
-                    </div><!-- .team -->
-                </div><!-- .card-inner -->
-            </div><!-- .card -->
-        </div><!-- .col -->
-    </div>
-</div><!-- .nk-block -->
+                    </div>
+                </li>
+            </ul>
+        </div><!-- .nk-chat-head -->
+        <div class="nk-chat-panel" id="chat-panel">
+            <app-messagewall></app-messagewall>
+        </div>
+        <div class="nk-chat-editor">
+            <app-add-message style="width:100%"></app-add-message>
+        </div>
+    </div><!-- .nk-chat-body -->
+</div><!-- .nk-chat -->

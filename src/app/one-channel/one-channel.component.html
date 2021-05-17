@@ -18,8 +18,12 @@
                 </li>
             </ul>
         </div><!-- .nk-chat-head -->
-        <app-messagewall></app-messagewall>
-        <app-add-message></app-add-message>
+        <div class="nk-chat-panel" id="chat-panel">
+            <app-messagewall></app-messagewall>
+        </div>
+        <div class="nk-chat-editor">
+            <app-add-message style="width:100%"></app-add-message>
+        </div>
     </div><!-- .nk-chat-body -->
 </div><!-- .nk-chat -->
 <a [routerLink]="['/my-channels/']" class="nk-menu-link text-danger">Voir les autres salons</a>

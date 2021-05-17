@@ -39,7 +39,7 @@ export class MessageService {
     });
   }
   getMessageByChannel(channelId: number){
-    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/channel/${channelId}`).subscribe( 
+    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/channel/${channelId}`).subscribe(
       res => {
         resolve(res);
       },

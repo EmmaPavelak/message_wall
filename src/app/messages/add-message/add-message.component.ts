@@ -25,7 +25,6 @@ export class AddMessageComponent implements OnInit {
     idUser=0;
     idChannel= this.route.snapshot.params['id'];
     channel:any;
-    swalusername:any
 
     ngOnInit(): void {
         Swal.fire({
@@ -37,12 +36,23 @@ export class AddMessageComponent implements OnInit {
             keydownListenerCapture: false,
             focusConfirm: false,
             allowEscapeKey: false,
-            allowOutsideClick: false
-
-        }).then((result) => {
-            if (result.value) {
-                this.swalusername = result.value
+            allowOutsideClick: false,
+            preConfirm : (name) =>{
+                return Promise.resolve()
+                .then(() => {
+                    if (!name) {
+                        throw new Error("Le nom doit être rempli bla bla bla")
+                    }
+                    return name
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(error)
+                })
             }
+        }).then((result) => {
+            this.addMessageForm.patchValue({
+                username: result.value
+            });
         });
 
     }
@@ -69,11 +79,12 @@ export class AddMessageComponent implements OnInit {
 
       this.addMessageForm = this.formBuilder.group({
         message: ['', Validators.required],
-        username: this.swalusername,
+        username: "Anonyme",
         idUser:this.idUser,
         idChannel:this.idChannel,
         sendDate: new Date()
       });
+      console.log("addMessageForm",this.addMessageForm)
 
     }
 
@@ -94,8 +105,7 @@ export class AddMessageComponent implements OnInit {
         return;
       }
       this.messageService.addMessage(this.addMessageForm.value).then((value) => {
-        console.warn('Your order has been submitted', this.addMessageForm.value);
-        location.reload();
+        console.warn('Your msg has been submitted', this.addMessageForm.value);
       });
 
       this.user.nbmess++;

@@ -1,17 +1,13 @@
-<div class="nk-chat-editor">
-
-    <form [formGroup]="addMessageForm" (ngSubmit)="onSubmit()" style="width: 100%; display:flex;">
-
+<form [formGroup]="addMessageForm" (ngSubmit)="onSubmit()" class="d-flex">
     <div class="nk-chat-editor-form">
-
         <div class="form-control-wrap">
             <textarea type="text" class="form-control form-control-simple no-resize" rows="1" id="message" placeholder="Entrer votre message"
             formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required>
+            </textarea>
             <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
                 <div *ngIf="f.message.errors.required">Message vide</div>
-            </div></textarea>
+            </div>
         </div>
-
     </div>
     <ul class="nk-chat-editor-tools g-2">
         <li>
@@ -22,4 +18,3 @@
         </li>
     </ul>
 </form>
-</div>
