@@ -1,12 +1,25 @@
-<h1>Nom du salon : {{channel.channelName}}</h1>
-<p>Nombre de message : {{channel.nbMessages}} </p>
-<p>Nombre de participants : {{channel.usersId.split(',').length}}</p>
-<app-add-message></app-add-message>
-
-<div class="card card-bordered" *ngFor=" let message of messages">
-    <div class="card-inner">
-        <h5 class="card-title">{{message.message}}</h5>
-    </div>
-</div>
-
+<div class="nk-chat">
+    <div class="nk-chat-body">
+        <div class="nk-chat-head">
+            <ul class="nk-chat-head-info">
+                <li class="nk-chat-body-close">
+                    <a href="#" class="btn btn-icon btn-trigger nk-chat-hide ml-n1"><em class="icon ni ni-arrow-left"></em></a>
+                </li>
+                <li class="nk-chat-head-user">
+                    <div class="user-card">
+                        <div class="user-avatar bg-purple">
+                            <span>?</span>
+                        </div>
+                        <div class="user-info">
+                            <div class="lead-text">{{channel.channelName}}</div>
+                            <div class="sub-text"><span class="d-none d-sm-inline mr-1">{{channel.usersId.split(',').length}} personnes</span></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- .nk-chat-head -->
+        <app-messagewall></app-messagewall>
+        <app-add-message></app-add-message>
+    </div><!-- .nk-chat-body -->
+</div><!-- .nk-chat -->
 <a [routerLink]="['/my-channels/']" class="nk-menu-link text-danger">Voir les autres salons</a>

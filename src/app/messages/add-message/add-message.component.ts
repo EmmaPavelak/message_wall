@@ -5,6 +5,8 @@ import { UsersService } from 'src/app/users/users.service';
 import { MessageService } from '../messagewall/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { ChannelsService } from 'src/app/channels/channels.service';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-add-message',
   templateUrl: './add-message.component.html',
@@ -23,9 +25,25 @@ export class AddMessageComponent implements OnInit {
     idUser=0;
     idChannel= this.route.snapshot.params['id'];
     channel:any;
+    swalusername:any
 
     ngOnInit(): void {
+        Swal.fire({
+            title: "Hello !",
+            text: "Merci de choisir un pseudo",
+            input: 'text',
+            showCancelButton: false,
+            showCloseButton: false,
+            keydownListenerCapture: false,
+            focusConfirm: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false
 
+        }).then((result) => {
+            if (result.value) {
+                this.swalusername = result.value
+            }
+        });
 
     }
 
@@ -51,7 +69,7 @@ export class AddMessageComponent implements OnInit {
 
       this.addMessageForm = this.formBuilder.group({
         message: ['', Validators.required],
-        username: ['', Validators.required],
+        username: this.swalusername,
         idUser:this.idUser,
         idChannel:this.idChannel,
         sendDate: new Date()

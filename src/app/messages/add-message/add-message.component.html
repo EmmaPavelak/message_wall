@@ -1,24 +1,12 @@
 <div class="nk-chat-editor">
-    <form id="addTreeForm" [formGroup]="addMessageForm" (ngSubmit)="onSubmit()" style="width: 100%; display:flex;">
 
-<form [formGroup]="addMessageForm" (ngSubmit)="onSubmit()"
-    [ngStyle]="{ display: seeAddForm ?'flex' : 'none' }">
+    <form [formGroup]="addMessageForm" (ngSubmit)="onSubmit()" style="width: 100%; display:flex;">
 
-    <div class="form-group">
-        <div class="form-label-group">
-            <label class="form-label" for="message">Message</label>
-        </div>
-        <input type="text" class="form-control form-control-lg" id="message" placeholder="Entrer votre message"
-            formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required>
-        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
-            <div *ngIf="f.message.errors.required">Message vide</div>
-        </div>
-    </div>
     <div class="nk-chat-editor-form">
 
         <div class="form-control-wrap">
             <textarea type="text" class="form-control form-control-simple no-resize" rows="1" id="message" placeholder="Entrer votre message"
-                formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required>
+            formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required>
             <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
                 <div *ngIf="f.message.errors.required">Message vide</div>
             </div></textarea>
@@ -33,5 +21,5 @@
             <button class="btn btn-round btn-primary btn-icon"><em class="icon ni ni-send-alt"></em></button>
         </li>
     </ul>
-    </form>
+</form>
 </div>

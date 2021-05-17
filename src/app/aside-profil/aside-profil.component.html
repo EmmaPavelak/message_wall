@@ -18,7 +18,7 @@
             </li><!-- .nk-menu-item -->
             <li class="nk-menu-item">
                 <a [routerLink]="['/my-channels/']" class="nk-menu-link">
-                    <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
+                    <span class="nk-menu-icon"><em class="icon ni ni-msg-circle"></em></span>
                     <span class="nk-menu-text">Mes salons</span>
                 </a>
             </li><!-- .nk-menu-item -->
@@ -39,7 +39,7 @@
             </li>
             <li class="nk-menu-item"  [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }" >
                 <a [routerLink]="['/edit-channel/']" class="nk-menu-link text-danger">
-                    <span class="nk-menu-icon"><em class="icon ni ni-users text-danger"></em></span>
+                    <span class="nk-menu-icon"><em class="icon ni ni-msg-circle text-danger"></em></span>
                     <span class="nk-menu-text">Gestion des salons</span>
                 </a>
             </li>
