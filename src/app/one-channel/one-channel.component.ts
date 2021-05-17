@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IChannel } from '../channels/channels.model';
 import { ChannelsService } from '../channels/channels.service';
 import { MessageService } from '../messages/messagewall/message.service';
 
@@ -10,7 +11,16 @@ import { MessageService } from '../messages/messagewall/message.service';
 })
 export class OneChannelComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private channelService: ChannelsService, private route: ActivatedRoute) { }
+  constructor(private messageService: MessageService, private channelService: ChannelsService, private route: ActivatedRoute) {
+    this.channel={
+      "id": 0,
+      "channelName": "",
+      "nbMessages": "0",
+      "creationDate": "",
+      "statut": "Privé",
+      "usersId": ""
+  }
+   }
   
   messages:any;
   channel:any;
