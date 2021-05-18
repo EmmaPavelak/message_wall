@@ -89,6 +89,7 @@ export class EditChannelComponent implements OnInit {
       channelName:  this.updateForm.value.channelName,nbMessages:this.channel.nbMessage,creationDate:this.channel.creationDate,
       statut:  this.updateForm.value.statut,
       usersId: this.newUsersId}).then((value) => {
+        location.reload();
         console.log(value);      
       });
     }

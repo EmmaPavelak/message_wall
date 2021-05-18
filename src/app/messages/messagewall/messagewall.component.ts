@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from './message.service';
 
 declare var $:any;
@@ -10,10 +11,14 @@ declare var $:any;
 })
 export class MessagewallComponent implements OnInit, OnDestroy {
 
-    constructor(private messageService: MessageService) { }
+    constructor(private messageService: MessageService,private route: ActivatedRoute) {
+        if(this.idChannel == undefined){
+            this.idChannel=0;
+        }
+     }
     messages:any = [];
     refreshInterval:any = null
-
+    idChannel= this.route.snapshot.params['id'];
     ngOnInit(): void {
 
         this.refreshMessages()
@@ -31,7 +36,7 @@ export class MessagewallComponent implements OnInit, OnDestroy {
     }
 
     refreshMessages(){
-        return this.messageService.getMessageByChannel(0)
+        return this.messageService.getMessageByChannel(this.idChannel)
         .then((value) => {
             if(!this.messages.length){
                 setTimeout(() => {
