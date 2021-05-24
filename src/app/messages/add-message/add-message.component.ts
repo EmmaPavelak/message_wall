@@ -41,7 +41,7 @@ export class AddMessageComponent implements OnInit {
                 return Promise.resolve()
                 .then(() => {
                     if (!name) {
-                        throw new Error("Le nom doit être rempli bla bla bla")
+                        throw new Error("Le nom doit être rempli")
                     }
                     return name
                 })
