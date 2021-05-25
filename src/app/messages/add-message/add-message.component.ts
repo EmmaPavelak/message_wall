@@ -59,23 +59,24 @@ export class AddMessageComponent implements OnInit {
 
     constructor(private messageService: MessageService, private channelService: ChannelsService, private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UsersService) {
 
+      if(this.route.snapshot.params['id'] == null){
+        this.idChannel = 0;
+      }
+
       if(this.token != null){
         this.tokenDecode = jwt_decode(this.token);
         this.idUser = this.tokenDecode.id;
 
         this.userService.getUserByID(this.tokenDecode.id).then((value) => {
           this.user = value;
-          });
+          });        
+      }   
 
-          this.channelService.getChannelById(this.idChannel).then((value) => {
-            this.channel=value;
-            console.log(value);
-          });
-      }
-
-      if(this.route.snapshot.params['id'] == null){
-        this.idChannel = 0;
-      }
+     
+      this.channelService.getChannelById(this.idChannel).then((value) => {
+        this.channel=value;
+        console.log(value);
+      });
 
       this.addMessageForm = this.formBuilder.group({
         message: ['', Validators.required],
@@ -104,15 +105,22 @@ export class AddMessageComponent implements OnInit {
       if (this.addMessageForm.invalid) {
         return;
       }
+      if(this.user != undefined){
+        this.user.nbmess++;
+        this.userService.updateUser(this.tokenDecode.id,this.user);
+      }
+      
+      this.channel.nbMessages++;     
+      this.channelService.updateChannel(this.channel.id,this.channel);
+
       this.messageService.addMessage(this.addMessageForm.value).then((value) => {
         console.warn('Your msg has been submitted', this.addMessageForm.value);
+
+        this.submitted = false;
+        this.addMessageForm.reset();
       });
 
-      this.user.nbmess++;
-      this.channel.nbMessages++;
-
-      this.userService.updateUser(this.tokenDecode.id,this.user);
-      this.channelService.updateChannel(this.channel.id,this.channel);
+      
     }
 
 }
