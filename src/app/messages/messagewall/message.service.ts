@@ -9,7 +9,7 @@ import { IMessage } from './message.models';
 export class MessageService {
 
 
-  url = 'http://localhost:3000/api/users-message';
+  url = 'https://back.message.btcv.fr/api/users-message';
   messages:any;
 
   constructor(private http: HttpClient) { }

@@ -8,7 +8,7 @@ import { IChannel } from './channels.model';
 export class ChannelsService {
  
   
-  url = 'http://localhost:3000/api/channels';
+  url = 'https://back.message.btcv.fr/api/channels';
   channels:any;
 
   constructor(private http: HttpClient) { }

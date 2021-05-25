@@ -10,7 +10,7 @@ import { IContact } from './contact.models';
 export class ContactService {
 
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:3000';
+  url = 'https://back.message.btcv.fr';
  
   createContact(data: IContact[]): Observable<Object> {
     return this.http.post(`${this.url}/api/contact`, data)  

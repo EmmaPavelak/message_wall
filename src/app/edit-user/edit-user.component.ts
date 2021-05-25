@@ -49,6 +49,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUser().then((value) => {
       this.users=value;
+      console.log(this.users);
     });
 
     if(this.token != null){
