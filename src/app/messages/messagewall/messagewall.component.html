@@ -1,0 +1,17 @@
+<div class="chat is-you" *ngFor="let message of messages">
+    <div class="chat-avatar">
+        <div class="user-avatar bg-purple">
+            <span>?</span>
+        </div>
+    </div>
+    <div class="chat-content">
+        <div class="chat-bubbles">
+            <div class="chat-bubble">
+                <div class="chat-msg"> {{message.message}} </div>
+            </div>
+        </div>
+        <ul class="chat-meta">
+            <li>{{message.username}}</li>
+        </ul>
+    </div>
+</div><!-- .chat -->

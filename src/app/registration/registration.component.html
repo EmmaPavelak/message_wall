@@ -1,0 +1,82 @@
+<div class="nk-content ">
+
+    <div class="nk-block nk-block-middle nk-auth-body">
+        <div class="nk-block-head">
+            <div class="nk-block-head-content">
+                <h5 class="nk-block-title">Inscription</h5>
+                <div class="nk-block-des">
+                    <p>Créer un compte pour sauver la planète</p>
+                </div>
+            </div>
+        </div>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="form-group"><label class="form-label" for="name">Prénom</label><input type="text"
+                class="form-control form-control-lg" id="firstname" placeholder="Entrer votre prénom" formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required>
+                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstname.errors.required">Prénom non rempli</div>
+                </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="name">Nom</label><input type="text"
+                class="form-control form-control-lg" id="lastname" placeholder="Entrer votre nom" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" required>
+                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastname.errors.required">Nom non rempli</div>
+                </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="name">Nom d'utilisateur</label><input type="text"
+                    class="form-control form-control-lg" id="username" placeholder="Entrer votre nom d'utilisateur" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Nom d'utilisateur non rempli</div>
+                    </div>
+                </div>
+            <div class="form-group"><label class="form-label" for="email">Email</label><input type="email"
+                    class="form-control form-control-lg" id="email" placeholder="Entrer votre email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email non rempli</div>
+                        <div *ngIf="f.email.errors.email" class="text-danger">Email invalide</div>
+                    </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="tel">Téléphone</label><input type="text"
+                class="form-control form-control-lg" id="tel" placeholder="Entrer votre téléphone" formControlName="tel" [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" required>
+                <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                    <div *ngIf="f.tel.errors.required">Téléphone non rempli</div>
+                    <div *ngIf="f.tel.errors.tel" class="text-danger">Téléphone invalide</div>
+                </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="address">Adresse</label><input type="text"
+                class="form-control form-control-lg" id="address" placeholder="Entrer votre addresse" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" required>
+                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required">Adresse non rempli</div>
+                    <div *ngIf="f.address.errors.address" class="text-danger">Adresse invalide</div>
+                </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="birthDate">Date de naissance</label><input type="date"
+                class="form-control form-control-lg" id="birthDate" placeholder="Entrer votre date de naissance" formControlName="birthDate" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }" required>
+                <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                    <div *ngIf="f.birthDate.errors.required">Date de naissance non rempli</div>
+                    <div *ngIf="f.birthDate.errors.birthDate" class="text-danger">Date de naissance invalide</div>
+                </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="password">Mot de passe</label>
+                <div class="form-control-wrap"><input type="password"
+                        class="form-control form-control-lg" id="password" placeholder="Entrer votre mot de passe" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Mot de passe non rempli</div>
+                            <div *ngIf="f.password.errors.minlenght">Le mot de passe doit contenir 6 caractères au minimum</div>
+                        </div>
+                    </div>
+            </div>
+            <div class="form-group"><label class="form-label" for="confirmPassword">Confirmation mot de passe</label>
+                <div class="form-control-wrap"><input type="password"
+                        class="form-control form-control-lg" id="confirmPassword" placeholder="Entrer votre mot de passe" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" required>
+                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.confirmPassword.errors.required">Mot de passe non rempli</div>
+                            <div *ngIf="f.confirmPassword.errors.mustMatch">Les mots de passe sont différents</div>
+                        </div>
+                    </div> 
+            </div>
+            <div [ngStyle]="{ display: registerOK ?'none' : 'block' }" class="alert alert-danger alert-icon"><em class="icon ni ni-cross-circle"></em> <strong>L'inscription a échoué</strong> ! Cet utilisateur existe déjà. </div>
+            <div class="form-group"><button class="btn btn-lg btn-primary btn-block">S'inscrire  </button></div>
+        </form>
+        <div class="form-note-s2 pt-4"> Vous avez déjà un compte ? <a routerLink="/login"><strong>Connectez-vous</strong></a></div>
+    </div>
+    </div>

@@ -1,0 +1,93 @@
+
+<div class="container-xl wide-xl">
+    <div class="nk-header-wrap">
+        <div class="nk-menu-trigger mr-sm-2 d-lg-none">
+            <a class="nk-nav-toggle nk-quick-nav-icon" data-target="headerNav"><em class="icon ni ni-menu"></em></a>
+        </div>
+        <div class="nk-header-brand">
+            <a routerLink="home" class="logo-link">
+                <img class="logo-img" src="/assets/images/logo.png" alt="logo">
+            </a>
+        </div><!-- .nk-header-brand -->
+        <div class="nk-header-menu" data-content="headerNav">
+            <div class="nk-header-mobile">
+                <div class="nk-header-brand">
+                    <a routerLink="home" class="logo-link">
+                        <img class="logo-img" src="/assets/images/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="nk-menu-trigger mr-n2">
+                    <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="headerNav"><em class="icon ni ni-arrow-left"></em></a>
+                </div>
+            </div>
+            <ul class="nk-menu nk-menu-main ui-s2">
+                <li class="nk-menu-item has-sub">
+                    <a routerLink="home" class="nk-menu-link">
+                        <span class="nk-menu-text">Message Wall</span>
+                    </a>
+                </li><!-- .nk-menu-item -->
+                <li class="nk-menu-item has-sub">
+                    <a routerLink="concept" class="nk-menu-link">
+                        <span class="nk-menu-text">Notre Concept</span>
+                    </a>
+                </li><!-- .nk-menu-item -->
+                <li class="nk-menu-item has-sub">
+                    <a routerLink="contact" class="nk-menu-link">
+                        <span class="nk-menu-text">Contact</span>
+                    </a>
+                </li><!-- .nk-menu-item -->
+            </ul><!-- .nk-menu -->
+        </div><!-- .nk-header-menu -->
+        <div class="nk-header-tools">
+            <ul class="nk-quick-nav">
+                <div *ngIf="token != null then co else notco">Le contenu saisi ici sera ignoré.</div>
+                <ng-template #notco>
+                    <li><a routerLink="login"><span>Se connecter</span></a></li>
+                    <li><a routerLink="registration"><span>S'inscrire</span></a> </li>
+                </ng-template>
+                <ng-template #co>
+                    <li class="dropdown user-dropdown order-sm-first">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <div class="user-toggle">
+                                <div class="user-avatar sm">
+                                    <em class="icon ni ni-user-alt"></em>
+                                </div>
+                                <div class="user-info d-none d-xl-block">
+                                    <div class="user-name dropdown-indicator">{{user.firstname}} {{user.lastname}}</div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1 is-light">
+                            <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                <div class="user-card">
+                                    <div class="user-avatar">
+                                        <span>AB</span>
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="lead-text">{{user.username}} <div class="ml-1 user-status text-danger" [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }"><sup>Administrateur</sup></div></span>
+                                        <span class="sub-text">{{user.email}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-inner">
+                                <ul class="link-list">
+                                    <li><a routerLink="my-account"><em class="icon ni ni-setting-alt"></em><span>Mon compte</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-inner" [ngStyle]="{ display: user.role=='Administrateur' ?'block' : 'none' }">
+                                <ul class="link-list">
+                                    <li><a [routerLink]="['/edit-user/']"><em class="icon ni ni-setting-alt text-danger"></em><span class="text-danger">Gestion des utilisateurs</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-inner">
+                                <ul class="link-list">
+                                    <li (click)="logout()"><a href="#"><em class="icon ni ni-signout text-danger"></em><span class="text-danger">Deconnexion</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li><!-- .dropdown -->
+                </ng-template>
+            </ul><!-- .nk-quick-nav -->
+        </div><!-- .nk-header-tools -->
+    </div><!-- .nk-header-wrap -->
+</div><!-- .container-fliud -->

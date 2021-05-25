@@ -1,0 +1,225 @@
+<body class="nk-body bg-white npc-default has-aside ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            <app-aside-profil></app-aside-profil>
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">Gestion des salons</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <p>Vous pouvez editer ou supprimer un salon.</p>
+                                                </div>
+                                                <button  class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#add-channel">Ajouter un salon</button> 
+                                    </div><!-- .nk-block-head-content -->
+                                        </div><!-- .nk-block-between -->
+                                    </div><!-- .nk-block-head -->
+                                    <div class="card card-bordered card-preview">
+                                        <table class="table table-tranx">
+                                            <thead>
+                                                <tr class="tb-tnx-head">
+                                                    <th class="tb-tnx-id"><span class="">#</span></th>
+                                                    <th class="tb-tnx-info">
+                                                        <span class="tb-tnx-desc d-none d-sm-inline-block">
+                                                            <span>Nom du salon</span>
+                                                        </span>
+                                                        <span class="tb-tnx-date d-md-inline-block d-none">                                  
+                                                            <span class="d-none d-md-block">
+                                                                <span>Nombre de participants</span>
+                                                                <span>Nombre de messages</span>
+                                                            </span>
+                                                        </span>
+                                                    </th>
+                                                    <th class="tb-tnx-amount is-alt">
+                                                        <span class="tb-tnx-total">Date de création</span>      
+                                                        <span class="tb-tnx-status d-none d-md-inline-block">Statut</span>                                                  
+                                                    </th>
+                                                    <th class="tb-tnx-action">
+                                                        <span>&nbsp;</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="tb-tnx-item" *ngFor=" let channel of channels">
+                                                    <td class="tb-tnx-id">
+                                                        <a href="#"><span>{{channel.id}}</span></a>
+                                                    </td>
+                                                    <td class="tb-tnx-info">
+                                                        <div class="tb-tnx-desc">
+                                                            <span class="title">{{channel.channelName}} </span>
+                                                        </div>
+                                                        <div class="tb-tnx-date">                                                          
+                                                            <div *ngIf="channel.usersId != null then user else nouser">Le contenu saisi ici sera ignoré.</div>
+                                                            <ng-template #nouser><span class="date">0</span></ng-template>
+                                                            <ng-template #user>  <span class="date">{{channel.usersId.split(',').length}}</span></ng-template>
+
+                                                            <span class="date">{{channel.nbMessages}}<em class="ml-1 icon ni ni-send"></em></span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="tb-tnx-amount is-alt">
+                                                        <div class="tb-tnx-total">
+                                                            <span class="amount">{{channel.creationDate.substr(0,10)}}</span>
+                                                        </div>  
+                                                        <div class="tb-tnx-status">
+                                                            <span class="badge badge-dot badge-body" [ngClass] = "{'badge-danger' : channel.statut=='Public'}">{{channel.statut}}</span> 
+                                                        </div>                                                     
+                                                    </td>
+                                                    <td class="tb-tnx-action">
+                                                        <div class="dropdown">
+                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
+                                                                <ul class="link-list-plain">
+                                                                    <li><a href="" (click)="getChannelById(channel.id)" data-toggle="modal" data-target="#profile-edit">Editer</a></li>
+                                                                    <li><a (click)="deleteChannel(channel.id)" class="text-danger">Supprimer</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>                                                                                      
+                                            </tbody>
+                                        </table>
+                                    </div><!-- .card-preview -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+                <!-- @@ Profile Edit Modal @e -->
+                <div class="modal fade" tabindex="-1" role="dialog" id="profile-edit">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                            <div class="modal-body modal-body-lg">
+                                <h5 class="title">Mettre à jour le salon</h5>
+                                <ul class="nk-nav nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#personal">Informations du salon</a>
+                                    </li>                           
+                                </ul><!-- .nav-tabs -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="personal">
+                                        <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+                                           
+                                        <div class="row gy-4">
+                                        
+                                            <input type="hidden" class="form-control" formControlName="id"  [(ngModel)]="channel.id" >
+                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="channelName">Nom du salon</label>
+                                                    <input type="text" class="form-control form-control-lg" formControlName="channelName" id="channelName" [(ngModel)]="channel.channelName" [ngClass]="{ 'is-invalid': submitted && f.channelName.errors }">
+                                                    <div *ngIf="submitted && f.channelName.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.channelName.errors.required">Nom du salon non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+                                            <div class="col-md-6">                                           
+                                                <div class="form-group">
+                                                    <label class="form-label" for="statut-l1">Statut</label>
+                                                    <select class="form-control form-control-lg" id="statut"  formControlName="statut" [ngClass]="{ 'is-invalid': submitted && f.statut.errors }" [(ngModel)]="channel.statut">
+                                                        <option value="Public">Public</option>
+                                                        <option value="Privé">Privé</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && f.statut.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.statut.errors.required">Role non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>         <div class="col-md-6">                                           
+                                                <div class="form-group">
+                                                    <label class="form-label" for="user">Ajouter un membre</label>
+                                                    <select class="form-control form-control-lg" id="user" formControlName="usersId" >
+                                                        <option value="{{user.id}}" *ngFor=" let user of users" >{{user.username}}</option>                                                      
+                                                    </select>                                                   
+                                                </div>
+                                            </div>                                         
+                                            <div class="col-12">
+                                                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                    <li>                                             
+                                                        <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Mettre à jour le salon</button></div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div><!-- .tab-pane -->
+                
+                                </div><!-- .tab-content -->
+                            </div><!-- .modal-body -->
+                        </div><!-- .modal-content -->
+                    </div><!-- .modal-dialog -->
+                </div><!-- .modal -->
+
+                <div class="modal fade" tabindex="-1" role="dialog" id="add-channel">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                            <div class="modal-body modal-body-lg">
+                                <h5 class="title">Créer un salon</h5>
+                                <ul class="nk-nav nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#personal">Informations du salon</a>
+                                    </li>                           
+                                </ul><!-- .nav-tabs -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="personal">
+                                        <form [formGroup]="createForm" (ngSubmit)="onSubmitCrea()">
+                                        <div class="row gy-4">
+         
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="channelName">Nom du salon</label>
+                                                    <input type="text" class="form-control form-control-lg" formControlName="channelName" id="channelName"  [ngClass]="{ 'is-invalid': submitted && f.channelName.errors }">
+                                                    <div *ngIf="submitted && f.channelName.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.channelName.errors.required">Nom du salon non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+                                            <div class="col-md-6">                                           
+                                                <div class="form-group">
+                                                    <label class="form-label" for="statut-l1">Statut</label>
+                                                    <select class="form-control form-control-lg" id="statut"  formControlName="statut" [ngClass]="{ 'is-invalid': submitted && f.statut.errors }" >
+                                                        <option value="Public">Public</option>
+                                                        <option value="Privé">Privé</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && f.statut.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.statut.errors.required">Role non rempli</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                    <li>                                             
+                                                        <div class="form-group"><button class="btn btn-lg btn-primary btn-block"  type="submit">Créer</button></div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-dismiss="modal" class="link link-light">Annuler</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div><!-- .tab-pane -->
+                
+                                </div><!-- .tab-content -->
+                            </div><!-- .modal-body -->
+                        </div><!-- .modal-content -->
+                    </div><!-- .modal-dialog -->
+                </div><!-- .modal -->
+    </div>
+</body>
