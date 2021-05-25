@@ -54,7 +54,7 @@ export class EditChannelComponent implements OnInit {
     ngOnInit(): void {
 
       this.userService.getAllUser().then((value) => {
-        this.users=value;
+        this.users=value;       
       });
 
       this.channelService.getAllChannels().then((value) => {

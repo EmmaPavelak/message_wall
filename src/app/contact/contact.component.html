@@ -45,11 +45,7 @@
                             <p class="text-soft">Nous sommes là pour vous répondre dans les plus brefs délais.</p>
                             <div class="form-control-wrap">
                                 <div class="form-editor-custom"><textarea class="form-control form-control-lg no-resize" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"
-                                    placeholder="Ecrivez votre message" required></textarea>
-                                    <div class="form-editor-action"><a class="link collapsed"
-                                        data-toggle="collapse" href="#filedown"><em
-                                        class="icon ni ni-clip"></em>Joindre un fichier</a>
-                                    </div>
+                                    placeholder="Ecrivez votre message" required></textarea>                                   
                                 </div>
                                 <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
                                     <div *ngIf="f.message.errors.required">Message non rempli</div>
