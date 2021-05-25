@@ -20,11 +20,11 @@ export class MessagewallComponent implements OnInit, OnDestroy {
     refreshInterval:any = null
     idChannel= this.route.snapshot.params['id'];
     ngOnInit(): void {
-
+        
         this.refreshMessages()
         .then(()=>{
-            setInterval(() => {
-                this.refreshMessages()
+            setInterval(() => {          
+                this.refreshMessages();
             }, 1000);
         })
     }

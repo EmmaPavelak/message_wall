@@ -50,15 +50,17 @@ export class AddMessageComponent implements OnInit {
                 })
             }
         }).then((result) => {
+          sessionStorage.setItem('username', result.value);
             this.addMessageForm.patchValue({
                 username: result.value
+               
             });
         });
 
     }
 
     constructor(private messageService: MessageService, private channelService: ChannelsService, private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UsersService) {
-
+     
       if(this.route.snapshot.params['id'] == null){
         this.idChannel = 0;
       }
@@ -112,15 +114,21 @@ export class AddMessageComponent implements OnInit {
       
       this.channel.nbMessages++;     
       this.channelService.updateChannel(this.channel.id,this.channel);
-
+      console.log(this.addMessageForm.value);
       this.messageService.addMessage(this.addMessageForm.value).then((value) => {
         console.warn('Your msg has been submitted', this.addMessageForm.value);
 
         this.submitted = false;
         this.addMessageForm.reset();
-      });
 
-      
+        this.addMessageForm = this.formBuilder.group({
+          message: ['', Validators.required],
+          username: sessionStorage.getItem('username'),
+          idUser:this.idUser,
+          idChannel:this.idChannel,
+          sendDate: new Date()
+        });
+      });
     }
 
 }
